@@ -1,17 +1,12 @@
 import datetime
 
-class Cruce():
+class Cruze():
 
-    def __init__(self, clave, objeto = None, fechaHora = None, alarma = None) -> None:
+    def __init__(self, objeto = None, fechaHora = None, alarma = None) -> None:
 
-        self._clave = clave
         self._objeto = objeto
         self._fechaHora = fechaHora
         self._alarma = alarma
-
-    @property
-    def clave(self):
-        return self._clave
 
     @property
     def objeto(self):
