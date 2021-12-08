@@ -11,4 +11,10 @@ print()
 print('Movimientos al catálogo de géneros')
 
 print()
-cruze = Cruze('Peaton', datetime.datetime(2021, 3, 24), True)
+
+try:
+    cruze = Cruze('Peaton', datetime.datetime(2021, 3, 24), True)
+    persistencia.agregarCruze(cruze)
+except PersistenciaException as pe:
+    print(pe.msj)
+    print(pe.cause)

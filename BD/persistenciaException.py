@@ -15,7 +15,7 @@ class PersistenciaException(Exception):
             @param msj Mensaje con la descripcion del error ocurrido
         '''
         super().__init__(msj)
-        self.__msj = msj;
+        self.__msj = msj
 
     @property
     def msj(self):

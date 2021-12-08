@@ -97,6 +97,7 @@ class Tabla:
 
             @param operacion Cadena con la operacion
         '''
+        
         # Establece la conexion con la BD
         conexion = mysql.connector.connect(user=self.user, 
                                         password=self.password, 

@@ -11,10 +11,11 @@ class CruzesBD(Tabla):
  
     def agrega(self, cruze):
 
-        operacion = f"INSERT {self.tablaCruzes}"
-        operacion += f" SET objeto = '{cruze.objeto:s}'"
-        operacion += f", fechaHora = '{cruze.fehcaHora:s}'"
-        operacion += f", alarma = '{cruze.alarma:s}'"       
+        operacion = f"INSERT INTO {self.tablaCruzes}"
+        operacion += f" (objeto, fechaHora, alarma) "
+        operacion += f"VALUES ('{cruze.objeto:s}', "
+        operacion += f"'{cruze.fechaHora:d}', "
+        operacion += f"'{cruze.alarma:b}')"       
         operacion += ";"
 
         try:
