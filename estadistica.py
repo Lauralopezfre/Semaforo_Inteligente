@@ -1,12 +1,12 @@
+import sys
+print(sys.version)
+
 from tkinter import * 
 from tkinter import messagebox
-import tkinter as tk
-from tkinter import ttk
-
-import matplotlib
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
-import pandas as pd
+import numpy as np
 
 # Creación de la ventana
 window = Tk() 
@@ -18,21 +18,31 @@ window.geometry('750x650')
 titulo = Label(window, text="Estadisticas semaforo inteligente", font=("Arial Bold", 15))
 titulo.grid(column=0, row=0)
 
-pruebaBoton = Label(window, text="")
-pruebaBoton.grid(column=1, row=2)
-
 btnBorrar = Button(window, text="Borrar datos")
-btnBorrar.grid(column=0, row=1)
+btnBorrar.grid(column=0, row=2)
 btnTerminar = Button(window, text="Terminar")
-btnTerminar.grid(column=1, row=1)
+btnTerminar.grid(column=1, row=2)
 
 # Grafico
-fig, axs = plt.subplots(1,3, dpi=80, figsize=(13, 4), sharey=True, facecolor='#0FA49F')
+menu = ['Autos', 'Peatones']
+colores = ['red', 'blue']
+tamaño = [45, 55]
+explotar = [0.05, 0.05]
 
+fig, ax1 = plt.subplots(dpi=100, facecolor= '#0FA49F', figsize=(5,5))
+
+plt.title("Accidentes automovilisticos", color='white', size=18, family='arial')
+ax1.pie(tamaño, explode=explotar, labels=menu, colors=colores, autopct='%1.0f%%', pctdistance=0.6, shadow=True, startangle=90, radius=0.7, labeldistance=0.3)
+
+ax1.axis('equal')
+
+canvas = FigureCanvasTkAgg(fig, master=window)
+canvas.draw()
+canvas.get_tk_widget().grid(column=0, row=1)
 
 # Acciones botones
 def borrar():
-    pruebaBoton.configure(text="Se clickeo el boton de borrar")
+    messagebox.showinfo('Resultado final', 'Se borro')
 
 def terminar():
     # Mensaje para mostrar el resultado final al terminar
@@ -41,8 +51,6 @@ def terminar():
 # Configuración botones
 btnBorrar.configure(command=borrar)
 btnTerminar.configure(command=terminar)
-
-
 
 # Mostrar al usuario
 window.mainloop()
