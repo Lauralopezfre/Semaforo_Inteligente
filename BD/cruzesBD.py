@@ -13,9 +13,9 @@ class CruzesBD(Tabla):
 
         operacion = f"INSERT INTO {self.tablaCruzes}"
         operacion += f" (objeto, fechaHora, alarma) "
-        operacion += f"VALUES ('{cruze.objeto:s}', "
-        operacion += f"'{cruze.fechaHora:d}', "
-        operacion += f"'{cruze.alarma:b}')"       
+        operacion += f"VALUES ('{cruze.objeto}', "
+        operacion += f"'{cruze.fechaHora}', "
+        operacion += f"{cruze.alarma})"       
         operacion += ";"
 
         try:

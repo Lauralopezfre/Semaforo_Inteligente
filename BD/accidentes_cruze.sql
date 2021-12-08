@@ -36,6 +36,9 @@ CREATE TABLE `cruze` (
 -- Dumping data for table `cruze`
 --
 
+ALTER TABLE `accidentes`.`cruze` 
+CHANGE COLUMN `idcruze` `idcruze` INT NOT NULL AUTO_INCREMENT ;
+
 LOCK TABLES `cruze` WRITE;
 /*!40000 ALTER TABLE `cruze` DISABLE KEYS */;
 /*!40000 ALTER TABLE `cruze` ENABLE KEYS */;
