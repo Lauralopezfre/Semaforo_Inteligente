@@ -53,4 +53,36 @@ btnBorrar.configure(command=borrar)
 btnTerminar.configure(command=terminar)
 
 # Mostrar al usuario
-window.mainloop()
+# window.mainloop()
+
+# Contectar con arduino 
+import serial
+from datetime import date, datetime, time
+from BD.cruze import Cruze
+from BD.cruzesBD import CruzesBD
+from BD.persistenciaBD import PersistenciaBD
+from BD.persistenciaException import PersistenciaException
+
+persistencia = PersistenciaBD()
+a = serial.Serial("COM13", 9600, timeout = 5) 
+
+estado = ''
+data = str(a.readline())
+estado = data
+
+valor = True
+while True:
+    data = str(a.readline())
+    if(data == estado and data != "b''"):
+        while valor:
+            try:
+                data = data[2:][:-5]
+                cruze = Cruze(data, datetime.now(), True)
+                persistencia.agregarCruze(cruze)
+                valor=False
+            except PersistenciaException as pe:
+                print(pe.msj)
+                print(pe.cause)
+    elif data != "b''":
+        valor=True
+        estado = data

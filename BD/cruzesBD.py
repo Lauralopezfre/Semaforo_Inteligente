@@ -1,8 +1,8 @@
 import datetime
 import mysql.connector
-from persistenciaException import PersistenciaException
-from tabla import Tabla
-from cruze import Cruze
+from BD.tabla import Tabla
+from BD.cruze import Cruze
+from BD.persistenciaException import PersistenciaException
 
 class CruzesBD(Tabla):
 

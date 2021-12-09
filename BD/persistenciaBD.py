@@ -1,7 +1,7 @@
 import datetime
-from cruze import Cruze
-from cruzesBD import CruzesBD
-from persistenciaException import PersistenciaException
+from BD.cruze import Cruze
+from BD.cruzesBD import CruzesBD
+from BD.persistenciaException import PersistenciaException
 
 class PersistenciaBD:
 
