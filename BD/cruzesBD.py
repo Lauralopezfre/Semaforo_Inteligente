@@ -16,7 +16,8 @@ class CruzesBD(Tabla):
         operacion += f" (objeto, fechaHora, alarma) "
         operacion += f"VALUES ('{cruze.objeto}', "
         operacion += f"'{cruze.fechaHora}', "
-        operacion += f"{cruze.alarma})"       
+        operacion += f"{cruze.alarma}), "
+        operacion += f"{cruze.distancia})"        
         operacion += ";"
 
         try:
@@ -25,7 +26,6 @@ class CruzesBD(Tabla):
             raise PersistenciaException(f'Error: {self.msj_error(e)} en la tabla {self.tablaCruzes} de la base de datos {self.database}') from e
 
     def obtener(self):
-        listaCruzes = []
         operacion = f"SELECT * FROM accidentes.{self.tablaCruzes};"
 
         try:

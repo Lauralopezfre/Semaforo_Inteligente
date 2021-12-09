@@ -73,11 +73,12 @@ estado = data
 valor = True
 while True:
     data = str(a.readline())
+    distancia = int(a.readline())
     if(data == estado and data != "b''"):
         while valor:
             try:
                 data = data[2:][:-5]
-                cruze = Cruze(data, datetime.now(), True)
+                cruze = Cruze(data, datetime.now(), True, 15, distancia)
                 persistencia.agregarCruze(cruze)
                 valor=False
             except PersistenciaException as pe:
