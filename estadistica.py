@@ -66,19 +66,29 @@ from BD.persistenciaException import PersistenciaException
 persistencia = PersistenciaBD()
 a = serial.Serial("COM13", 9600, timeout = 5) 
 
-estado = ''
-data = str(a.readline())
-estado = data
-
 valor = True
+valorInicio = True
 while True:
     data = str(a.readline())
-    distancia = int(a.readline())
-    if(data == estado and data != "b''"):
+    while valorInicio:
+        
+        if(data != "b''"):
+            palabrasPrueba = data.split()
+            estado = palabrasPrueba[1].strip()
+            valorInicio=False
+        else:
+            data = str(a.readline())
+
+    if(data != "b''"):
+        palabras = data.split()
+        objeto = palabras[1].strip()
+        distancia = palabras[2].strip()
+        distancia = distancia.split("\\")
+    
+    if(objeto == estado and data != "b''"):
         while valor:
             try:
-                data = data[2:][:-5]
-                cruze = Cruze(data, datetime.now(), True, 15, distancia)
+                cruze = Cruze(objeto, datetime.now(), True, distancia[0])
                 persistencia.agregarCruze(cruze)
                 valor=False
             except PersistenciaException as pe:
@@ -86,4 +96,4 @@ while True:
                 print(pe.cause)
     elif data != "b''":
         valor=True
-        estado = data
+        estado = objeto

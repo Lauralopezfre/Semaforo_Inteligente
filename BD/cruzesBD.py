@@ -13,10 +13,10 @@ class CruzesBD(Tabla):
     def agrega(self, cruze):
 
         operacion = f"INSERT INTO {self.tablaCruzes}"
-        operacion += f" (objeto, fechaHora, alarma) "
+        operacion += f" (objeto, fechaHora, alarma, distancia) "
         operacion += f"VALUES ('{cruze.objeto}', "
         operacion += f"'{cruze.fechaHora}', "
-        operacion += f"{cruze.alarma}), "
+        operacion += f"{cruze.alarma}, "
         operacion += f"{cruze.distancia})"        
         operacion += ";"
 
