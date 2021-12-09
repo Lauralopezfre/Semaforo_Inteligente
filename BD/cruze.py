@@ -1,8 +1,8 @@
 import datetime
 
-class Cruze():
+class Cruze:
 
-    def __init__(self, objeto = None, fechaHora = None, alarma = None) -> None:
+    def __init__(self, objeto = None, fechaHora = None, alarma = None):
 
         self._objeto = objeto
         self._fechaHora = fechaHora

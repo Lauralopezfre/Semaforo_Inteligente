@@ -16,3 +16,7 @@ class PersistenciaBD:
 
     def agregarCruze(self, cruze):
         self._catalogoCruzes.agrega(cruze)
+
+    def consultarCruze(self):
+        
+        return self._catalogoCruzes.obtener()

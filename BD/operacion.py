@@ -8,7 +8,7 @@ from persistenciaException import PersistenciaException
 persistencia = PersistenciaBD()
 
 print()
-print('Movimientos al catálogo de géneros')
+print('Guardar registro')
 
 print()
 
@@ -18,3 +18,20 @@ try:
 except PersistenciaException as pe:
     print(pe.msj)
     print(pe.cause)
+
+print()
+print('Obtener registro')
+
+lista = []
+try:
+    
+    lista = persistencia.consultarCruze()
+    for c in lista:
+        print(c)
+        cruzeObjeto = Cruze(*c)
+        print(cruzeObjeto.objeto)
+
+except PersistenciaException as pe:
+    print(pe.msj)
+    print(pe.cause)
+    
