@@ -34,7 +34,7 @@ const int DISTANCIA_MAX = 200;
 
 const int PIN_ZUMBADOR = 2;
 
-const int DISTANCIA_ALERTA = 15;
+const int DISTANCIA_ALERTA = 10;
 const unsigned int BAUD_RATE = 9600;
 
 // Periodo en ms que dura encendido o apagado el LED (SEMAFORO)
@@ -118,13 +118,14 @@ void validarVieneCarro() {
   int uS = sonar.ping_median();
   // Calcular la distancia a la que se encuentra el objeto
   int distancia = sonar.convert_cm(uS);
-  Serial.print("Distancia: ");
-  Serial.print(distancia);
-  Serial.println(" cm");
+  
 
   // Si la distancia es menor a DISTANCIA_ALERTA, suena la alarma
   if (distancia <= DISTANCIA_ALERTA && distancia != 0) {
     suenaAlarma(tonos);
+    String texto = "Viene automovil ";
+    texto += distancia;
+    Serial.println(texto);
   } else {
     apagaAlarma();
   }
@@ -135,7 +136,9 @@ void validarVieneHumano() {
   int value = digitalRead(PIN_PIR);
   if (value == HIGH)
   {
-    Serial.println("Se detecto algo");
+    String texto = "Viene peaton ";
+    texto += '0';
+    Serial.println(texto);
     suenaAlarma(tonos);
   } else {
     apagaAlarma();
