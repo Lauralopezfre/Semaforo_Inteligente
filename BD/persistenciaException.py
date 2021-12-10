@@ -3,53 +3,29 @@
 #
 
 class PersistenciaException(Exception):
-    ''' Exception lanzada cuando ocurre un error en el mecanismo de persistencia
-        en el programa amante musica
-
-        @utor: Manuel Domitsu Kono
-    '''
-
+    #Exception lanzada cuando ocurre un error en el mecanismo de persistencia
+    #en el programa amante musica
     def __init__(self, msj):
-        ''' Constructor de la clase. Inicializa los atributos de la clase
-
-            @param msj Mensaje con la descripcion del error ocurrido
-        '''
+        # Constructor de la clase. Inicializa los atributos de la clase
         super().__init__(msj)
         self.__msj = msj
 
     @property
+    # Regresa el mensaje de error
     def msj(self):
-        ''' Regresa el mensaje de error 
-
-            @returns El mensaje de error
-        '''
         return self.__msj
 
     @property
+    # Regresa la causa original del error
     def cause(self):
-        ''' Regresa la causa original del error
-
-            @returns La causa original del error
-        '''
         return self.__cause__       
 
-
+    # Regresa una cadena con una representacion amigable de una instancia de la clase
     def __str__(self):
-        ''' Regresa una cadena con una representacion amigable
-            de una instancia de la clase
-
-            @returns Una cadena con una representacion amigable
-                de la instancia de la clase
-        '''
         return (f'PersistenciaException: {self.__msj}, {self.__cause__}')
 
     def __repr__(self):
-        ''' Regresa una cadena con una representacion unica 
-            de una instancia de la clase
-
-            @returns Una cadena con una representacion unica
-                de la instancia de la clase
-        '''
+        # Regresa una cadena con una representacion unica de una instancia de la clase
         return (f'{self.__module__}.{self.__class__.__name__}: {self.__msj}, {self.__cause__}')
 
 

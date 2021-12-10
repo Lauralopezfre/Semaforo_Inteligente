@@ -6,35 +6,31 @@ import mysql.connector
 import mysql.connector.errorcode
 
 class Tabla:
-    ''' Esta clase implementa las operaciones de consultar y actualizar una 
-        tabla de una BD
-
-        @utor: Manuel Domitsu kono
-    '''
+    # Esta clase implementa las operaciones de consultar y actualizar una tabla de una BD
     
     def __init__(self, user, password, host, database):
-        ''' Constructor de la clase. Inicializa los atributos empleados para 
-            conectarse con la BD
+            # Constructor de la clase. Inicializa los atributos empleados para 
+            # conectarse con la BD
 
-            @param user Nombre del usuario de la base de datos
-            @param password Contrasenha del usuario de la base de datos 
-            @param host Dirección IP de la computadora con la base de datos
-            @param database Base de datos 
-        '''
+            # @param user Nombre del usuario de la base de datos
+            # @param password Contrasenha del usuario de la base de datos 
+            # @param host Dirección IP de la computadora con la base de datos
+            # @param database Base de datos 
+        
         self.user = user
         self.password = password
         self.host = host
         self.database = database
 
     def obten(self, operacion):
-        ''' Busca un renglon de una tabla de la BD usando la consulta
-            del parametro operacion y con los parametros dados por el
-            parametro parametros
-            Regresa una tupla con el resultado de la consulta
+            # Busca un renglon de una tabla de la BD usando la consulta
+            # del parametro operacion y con los parametros dados por el
+            # parametro parametros
+            # Regresa una tupla con el resultado de la consulta
 
-            @param operacion Cadena con la operacion
-            @return Una tupla con el resultado de la consulta
-        '''
+            # @param operacion Cadena con la operacion
+            # @return Una tupla con el resultado de la consulta
+        
         # Establece la conexion con la BD
         conexion = mysql.connector.connect(user=self.user, 
                                         password=self.password, 
@@ -59,13 +55,13 @@ class Tabla:
                 conexion.close()
 
     def consulta(self, operacion):
-        ''' Consulta una tabla de la BD usando la consulta del parametro
-            operacion y con los parametros dados por el parametro parametros
-            Regresa una lista de tuplas con los resultados de la consulta
+            # Consulta una tabla de la BD usando la consulta del parametro
+            # operacion y con los parametros dados por el parametro parametros
+            # Regresa una lista de tuplas con los resultados de la consulta
 
-            @param operacion Cadena con la operacion
-            @return La lista con los resultados de la consulta
-        '''
+            # @param operacion Cadena con la operacion
+            # @return La lista con los resultados de la consulta
+        
         # Establece la conexion con la BD
         conexion = mysql.connector.connect(user=self.user, 
                                         password=self.password, 
@@ -90,13 +86,13 @@ class Tabla:
                 conexion.close()
 
     def actualiza(self, operacion):
-        ''' Actualiza la BD usando la consulta del parametro operacion
-            y con los parametros dados por el parametro parametros
-            Permite insertar, actualizar o eliminar un renglon de una 
-            tabla de la BD 
+            # Actualiza la BD usando la consulta del parametro operacion
+            # y con los parametros dados por el parametro parametros
+            # Permite insertar, actualizar o eliminar un renglon de una 
+            # tabla de la BD 
 
-            @param operacion Cadena con la operacion
-        '''
+            # @param operacion Cadena con la operacion
+        
         
         # Establece la conexion con la BD
         conexion = mysql.connector.connect(user=self.user, 
@@ -124,15 +120,15 @@ class Tabla:
                 conexion.close()
 
     def msj_error(self, err):
-        ''' Regresa una cadena con un mensaje amigable del error
-            o excepcion ocurrido al acceder al manejador de BD
-            mySQL
+            # Regresa una cadena con un mensaje amigable del error
+            # o excepcion ocurrido al acceder al manejador de BD
+            # mySQL
 
-            @param instancia del error o excepcion ocurrido
-            @returns Una cadena con un mensaje amigable del error
-            o excepcion ocurrido al acceder al manejador de BD
-            mySQL
-        '''
+            # @param instancia del error o excepcion ocurrido
+            # @returns Una cadena con un mensaje amigable del error
+            # o excepcion ocurrido al acceder al manejador de BD
+            # mySQL
+        
         if err.errno == mysql.connector.errorcode.ER_SYNTAX_ERROR:
             return f'Error de sintaxis en la operacion' 
         elif err.errno == mysql.connector.errorcode.ER_DUP_ENTRY:

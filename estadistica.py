@@ -63,16 +63,22 @@ from BD.cruzesBD import CruzesBD
 from BD.persistenciaBD import PersistenciaBD
 from BD.persistenciaException import PersistenciaException
 
+#Conexion con la base de datos para utilizar sus métodos de acceso a datos
 persistencia = PersistenciaBD()
 a = serial.Serial("COM13", 9600, timeout = 5) 
 
+#Se reciben los datos de arduino
 valor = True
 valorInicio = True
 while True:
+
+    #Se obtiene los valores desde arduino
     data = str(a.readline())
     while valorInicio:
         
-        if(data != "b''"):
+        #Se implementa un estado sobre en que semaforo esta (peaton o automovil) y que solo almacena una vez
+        #no todas las veces que esta evaluando en el loopde arduino
+        if(data != "b''" and data != "b'i'"):
             palabrasPrueba = data.split()
             estado = palabrasPrueba[1].strip()
             valorInicio=False
@@ -80,20 +86,31 @@ while True:
             data = str(a.readline())
 
     if(data != "b''"):
+
+        #Se separan los valores
         palabras = data.split()
         objeto = palabras[1].strip()
         distancia = palabras[2].strip()
         distancia = distancia.split("\\")
     
+    #Esta sentencia es para que solo almacene una vez
     if(objeto == estado and data != "b''"):
         while valor:
             try:
+
+                #Se crea el objeto con los datos del cruze o alerta
                 cruze = Cruze(objeto, datetime.now(), True, distancia[0])
+
+                #Se almacena en la base de datos
                 persistencia.agregarCruze(cruze)
+
+                #Se almacena solo una vez
                 valor=False
             except PersistenciaException as pe:
                 print(pe.msj)
                 print(pe.cause)
+
+    #Cambio de estado
     elif data != "b''":
         valor=True
         estado = objeto
